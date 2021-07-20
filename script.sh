@@ -83,7 +83,7 @@ PASS = ''
 BUFLEN = 4096 * 4
 TIMEOUT = 60
 DEFAULT_HOST = "127.0.0.1:$pt"
-RESPONSE = 'HTTP/1.1 101 Switching Protocols ANdresAYa! \r\n\r\n'
+RESPONSE = 'HTTP/1.1 101 Switching Protocols! \r\n\r\n'
  
 class Server(threading.Thread):
     def __init__(self, host, port):
@@ -346,6 +346,8 @@ screen -dmS pythonwe python proxy.py -p 80&
 }
 fun_bar 'inst_py'
 rm -rf proxy.py
+iptables -I INPUT -p tcp --dport 80 -j ACCEPT
+iptables -I INPUT -p tcp --dport 443 -j ACCEPT
 echo
 echo -e " \033[1;37m  AHORA HAGA LO SIGUENTE "
 echo -e " \033[1;37mPARA CREAR UN USUARIO ESCRIBA :CREARUSER "
