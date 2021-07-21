@@ -44,8 +44,6 @@ inst_ssl () {
 pkill -f stunnel4
 pkill -f stunnel
 pkill -f 443
-pkill -f v2ray
-pkill -f v2-ui
 apt-get purge stunnel4 -y
 apt-get purge stunnel -y
 apt-get install stunnel4 -y
@@ -345,9 +343,12 @@ screen -dmS pythonwe python proxy.py -p 80&
 
 }
 fun_bar 'inst_py'
-rm -rf proxy.py
+proxy.py
 iptables -I INPUT -p tcp --dport 80 -j ACCEPT
 iptables -I INPUT -p tcp --dport 443 -j ACCEPT
+
+echo -e "ps x | grep 'pythonwe' | grep -v 'grep' || screen -dmS pythonwe python proxy.py -p 80" >> /etc/autostart
+
 echo
 echo -e " \033[1;37m  AHORA HAGA LO SIGUENTE "
 echo -e " \033[1;37mPARA CREAR UN USUARIO ESCRIBA :CREARUSER "
